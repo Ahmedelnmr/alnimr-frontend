@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تصفح المشاريع — النمر للعقارات</title>
+  <meta name="description" content="تصفح وابحث عن المشاريع العقارية السكنية والتجارية في جميع أنحاء مصر." />
+  <script>
+    window.APP_CONFIG = {
+      API_URL: 'http://localhost:8000/api/v1',
+      CLOUDINARY_CLOUD_NAME: 'your-cloud-name',
+      CLOUDINARY_UPLOAD_PRESET: 'your-upload-preset',
+    };
+  </script>
+  <link rel="stylesheet" href="../css/main.css" />
+  <style>
+    body { padding-top: 72px; }
+
+    .projects-header {
+      background: var(--bg-dark);
+      padding: 60px 0 40px;
+    }
+    .projects-header h1 { color: var(--color-cream); }
+    .projects-header p { color: rgba(248,244,238,0.65); }
+
+    .filter-wrapper {
+      position: sticky;
+      top: 72px;
+      z-index: 100;
+      background: var(--bg-body);
+      padding: 20px 0;
+      border-bottom: 1px solid #E2E8F0;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .projects-grid { padding: 48px 0; }
+
+    .results-info {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+    .results-info strong { color: var(--text-primary); }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-solid" id="navbar">
+  <div class="navbar-inner">
+    <a href="../index.html" class="navbar-logo">النمر<span class="logo-accent">للعقارات</span></a>
+    <ul class="navbar-nav" id="navMenu">
+      <li><a href="../index.html">الرئيسية</a></li>
+      <li><a href="projects.html" class="active">المشاريع</a></li>
+      <li><a href="companies.html">المطورين</a></li>
+    </ul>
+    <div class="navbar-actions">
+      <a href="dashboard/index.html" class="btn btn-outline btn-sm">لوحة التحكم</a>
+    </div>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<div class="projects-header">
+  <div class="container">
+    <h1>جميع المشاريع</h1>
+    <p>اكتشف التطورات العقارية المتميزة في جميع أنحاء مصر</p>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filter-wrapper">
+  <div class="container">
+    <div class="filter-bar">
+      <div class="filter-group" style="flex:2;min-width:200px">
+        <label>بحث</label>
+        <input type="text" id="filterSearch" class="form-control" placeholder="اسم المشروع، الموقع..." />
+      </div>
+      <div class="filter-group">
+        <label>النوع</label>
+        <select id="filterType" class="form-control">
+          <option value="">جميع الأنواع</option>
+          <option value="Residential">سكني</option>
+          <option value="Commercial">تجاري</option>
+          <option value="Administrative">إداري</option>
+          <option value="Medical">طبي</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>الحالة</label>
+        <select id="filterStatus" class="form-control">
+          <option value="">جميع الحالات</option>
+          <option value="Launch">إطلاق جديد</option>
+          <option value="Under Construction">تحت الإنشاء</option>
+          <option value="Ready">جاهز للاستلام</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>المطور</label>
+        <select id="filterCompany" class="form-control">
+          <option value="">جميع المطورين</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>الموقع</label>
+        <input type="text" id="filterLocation" class="form-control" placeholder="مثال: التجمع الخامس" />
+      </div>
+      <div class="filter-group">
+        <label>السعر الأقصى</label>
+        <input type="number" id="filterPrice" class="form-control" placeholder="بالجنيه المصري" min="0" />
+      </div>
+      <button class="btn btn-primary" id="applyFilters">تطبيق</button>
+      <button class="btn btn-ghost btn-sm" id="clearFilters">مسح</button>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<div class="projects-grid">
+  <div class="container">
+    <div class="results-info" id="resultsInfo"></div>
+    <div class="grid grid-3" id="projectsGrid">
+      <div class="skeleton" style="height:380px;border-radius:var(--radius-lg)"></div>
+      <div class="skeleton" style="height:380px;border-radius:var(--radius-lg)"></div>
+      <div class="skeleton" style="height:380px;border-radius:var(--radius-lg)"></div>
+    </div>
+    <div id="pagination" class="pagination"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <span>© 2024 النمر للعقارات. جميع الحقوق محفوظة.</span>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="../pages-js/projects.js"></script>
+</body>
+</html>

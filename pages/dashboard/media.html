@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>معرض الصور — النمر للعقارات</title>
+  <script>window.APP_CONFIG = { API_URL: 'http://localhost:8000/api/v1' };</script>
+  <link rel="stylesheet" href="../../css/main.css" />
+  <link rel="stylesheet" href="../../css/dashboard.css" />
+  <style>
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+      padding: 24px;
+    }
+    .gallery-card {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      box-shadow: var(--shadow-sm);
+      group: gallery;
+    }
+    .gallery-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .gallery-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .gallery-card:hover .gallery-card-overlay {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+<div class="dash-card">
+  <div class="dash-card-header">
+    <h3>معرض الوسائط (الصور والفيديو)</h3>
+    <div style="display:flex; gap:12px">
+      <select id="filterProject" class="form-control" style="width:250px">
+        <option value="">جميع المشاريع</option>
+      </select>
+      <button class="btn btn-primary btn-sm" id="openUploadModal" disabled>➕ إضافة صور</button>
+    </div>
+  </div>
+  <div class="dash-card-body p-0" id="galleryContainer">
+    <div class="text-center text-muted" style="padding:40px">اختر مشروعاً من القائمة لعرض وإدارة الصور الخاصة به.</div>
+  </div>
+</div>
+
+<!-- Modal: Upload Media -->
+<div class="modal-overlay" id="uploadModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>إضافة صور للمشروع</h3>
+      <div class="modal-close" id="closeModal">✕</div>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">المشروع</label>
+        <input type="text" id="projectNameDisplay" class="form-control" readonly disabled />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">رفع الصور</label>
+        <div class="upload-zone" id="mediaUploadZone" style="padding:40px">
+          <div class="upload-zone-icon" style="font-size:2rem">📸🎥</div>
+          <p>اضغط لاختيار الصور أو الفيديوهات أو اسحبها هنا</p>
+          <p style="font-size:0.8rem; margin-top:8px">يمكنك رفع صورة أو فيديو واحد كل مرة</p>
+        </div>
+        <input type="file" id="mediaFile" accept="image/*,video/*" class="hidden" />
+      </div>
+    </div>
+    <div class="modal-footer" style="justify-content:center">
+      <button class="btn btn-ghost" id="cancelModal">إغلاق</button>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="../../pages-js/dashboard/media.js"></script>
+</body>
+</html>

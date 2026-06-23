@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>إدارة المشاريع — النمر للعقارات</title>
+  <script>window.APP_CONFIG = { API_URL: 'http://localhost:8000/api/v1' };</script>
+  <link rel="stylesheet" href="../../css/main.css" />
+  <link rel="stylesheet" href="../../css/dashboard.css" />
+</head>
+<body>
+
+<div class="dash-card">
+  <div class="dash-card-header">
+    <h3>المشاريع</h3>
+    <div style="display:flex; gap:12px">
+      <select id="filterCompany" class="form-control" style="width:200px">
+        <option value="">جميع المطورين</option>
+      </select>
+      <button class="btn btn-primary btn-sm" id="openCreateModal">➕ إضافة مشروع</button>
+    </div>
+  </div>
+  <div class="dash-card-body p-0">
+    <table class="table" id="projectsTable">
+      <thead>
+        <tr>
+          <th>اسم المشروع</th>
+          <th>المطور</th>
+          <th>النوع / الحالة</th>
+          <th>الموقع</th>
+          <th style="text-align:left">الإجراءات</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td colspan="5" class="text-center" style="padding:40px">جاري التحميل...</td></tr>
+      </tbody>
+    </table>
+    <div id="pagination" class="pagination" style="padding: 20px; margin:0"></div>
+  </div>
+</div>
+
+<!-- Modal: Create / Edit Project -->
+<div class="modal-overlay" id="projectModal">
+  <div class="modal" style="max-width: 800px;">
+    <div class="modal-header">
+      <h3 id="modalTitle">إضافة مشروع</h3>
+      <div class="modal-close" id="closeModal">✕</div>
+    </div>
+    <div class="modal-body">
+      <form id="projectForm">
+        <input type="hidden" id="projectId" />
+        
+        <div class="grid grid-2">
+          <div class="form-group">
+            <label class="form-label">اسم المشروع <span>*</span></label>
+            <input type="text" id="name" class="form-control" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">المطور <span>*</span></label>
+            <select id="company_id" class="form-control" required></select>
+          </div>
+        </div>
+
+        <div class="grid grid-3">
+          <div class="form-group">
+            <label class="form-label">النوع <span>*</span></label>
+            <select id="type" class="form-control" required>
+              <option value="Residential">سكني</option>
+              <option value="Commercial">تجاري</option>
+              <option value="Administrative">إداري</option>
+              <option value="Medical">طبي</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">الحالة</label>
+            <select id="status" class="form-control">
+              <option value="Launch">إطلاق جديد</option>
+              <option value="Under Construction">تحت الإنشاء</option>
+              <option value="Ready">جاهز للاستلام</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">الموقع <span>*</span></label>
+            <input type="text" id="location" class="form-control" required placeholder="مثال: العاصمة الإدارية" />
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">الوصف</label>
+          <textarea id="description" class="form-control"></textarea>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="form-group">
+            <label class="form-label">السعر المبدئي</label>
+            <input type="number" id="price_start" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">خطة الدفع (نص)</label>
+            <input type="text" id="payment_plan" class="form-control" placeholder="مثال: مقدم 10% وتقسيط على 8 سنوات" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">رابط خرائط جوجل</label>
+          <input type="url" id="map_url" class="form-control" style="text-align:left; direction:ltr;" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">المميزات والمرافق (اكتب واضغط Enter)</label>
+          <div class="tags-input" id="featuresInput">
+            <input type="text" class="tags-input-field" placeholder="إضافة ميزة..." />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">صورة الغلاف</label>
+          <div class="upload-zone" id="coverUploadZone" style="padding:20px">
+            <div class="upload-zone-icon" style="font-size:1.5rem">🖼️</div>
+            <p>اضغط أو اسحب الغلاف هنا</p>
+            <div id="coverPreview" class="upload-preview" style="display:none">
+              <div class="upload-thumb">
+                <img id="coverImg" src="" />
+                <div class="upload-thumb-remove" id="removeCover">✕</div>
+              </div>
+            </div>
+          </div>
+          <input type="file" id="coverFile" accept="image/*" class="hidden" />
+          <input type="hidden" id="coverUrl" />
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" id="cancelModal">إلغاء</button>
+      <button class="btn btn-primary" id="saveProject">حفظ المشروع</button>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="../../pages-js/dashboard/projects.js"></script>
+</body>
+</html>

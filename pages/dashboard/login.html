@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تسجيل دخول الإدارة — النمر للعقارات</title>
+  <script>
+    window.APP_CONFIG = { API_URL: 'http://localhost:8000/api/v1' };
+  </script>
+  <link rel="stylesheet" href="../../css/main.css" />
+  <style>
+    body {
+      background: var(--bg-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .login-card {
+      background: var(--bg-card);
+      padding: 40px;
+      border-radius: var(--radius-xl);
+      width: 100%;
+      max-width: 440px;
+      box-shadow: var(--shadow-xl);
+    }
+    .login-header { text-align: center; margin-bottom: 32px; }
+    .login-logo {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-navy);
+      margin-bottom: 8px;
+    }
+    .login-logo span { color: var(--color-gold); }
+    .login-subtitle { color: var(--text-muted); }
+  </style>
+</head>
+<body>
+
+<div class="login-card">
+  <div class="login-header">
+    <div class="login-logo">النمر<span>للعقارات</span></div>
+    <div class="login-subtitle">تسجيل الدخول للوحة التحكم</div>
+  </div>
+
+  <form id="loginForm">
+    <div class="form-group">
+      <label class="form-label">البريد الإلكتروني</label>
+      <input type="email" id="email" class="form-control" required placeholder="admin@realestate.com" style="text-align:left; direction:ltr;" />
+    </div>
+    <div class="form-group mb-32">
+      <label class="form-label">كلمة المرور</label>
+      <input type="password" id="password" class="form-control" required placeholder="••••••••" style="text-align:left; direction:ltr;" />
+    </div>
+    <button type="submit" class="btn btn-primary w-full" id="loginBtn" style="justify-content:center;padding:14px">
+      تسجيل الدخول
+    </button>
+  </form>
+
+  <div style="text-align:center;margin-top:24px">
+    <a href="../../index.html" style="color:var(--text-muted);font-size:0.9rem;text-decoration:underline">← العودة للموقع</a>
+  </div>
+</div>
+
+<script type="module" src="../../pages-js/dashboard/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>إدارة المطورين — النمر للعقارات</title>
+  <script>window.APP_CONFIG = { API_URL: 'http://localhost:8000/api/v1' };</script>
+  <link rel="stylesheet" href="../../css/main.css" />
+  <link rel="stylesheet" href="../../css/dashboard.css" />
+</head>
+<body>
+
+<div class="dash-card">
+  <div class="dash-card-header">
+    <h3>شركات التطوير العقاري</h3>
+    <button class="btn btn-primary btn-sm" id="openCreateModal">➕ إضافة شركة</button>
+  </div>
+  <div class="dash-card-body p-0">
+    <table class="table" id="companiesTable">
+      <thead>
+        <tr>
+          <th>الشعار</th>
+          <th>الاسم</th>
+          <th>الموقع الإلكتروني</th>
+          <th>المشاريع</th>
+          <th style="text-align:left">الإجراءات</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td colspan="5" class="text-center" style="padding:40px">جاري التحميل...</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal: Create / Edit Company -->
+<div class="modal-overlay" id="companyModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modalTitle">إضافة شركة</h3>
+      <div class="modal-close" id="closeModal">✕</div>
+    </div>
+    <div class="modal-body">
+      <form id="companyForm">
+        <input type="hidden" id="companyId" />
+        
+        <div class="form-group">
+          <label class="form-label">اسم الشركة <span>*</span></label>
+          <input type="text" id="name" class="form-control" required />
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">الوصف</label>
+          <textarea id="description" class="form-control"></textarea>
+        </div>
+        
+        <div class="grid grid-2">
+          <div class="form-group">
+            <label class="form-label">رابط الموقع الإلكتروني</label>
+            <input type="url" id="website" class="form-control" placeholder="https://" style="text-align:left; direction:ltr;" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">رابط فيديو ترويجي</label>
+            <input type="url" id="video_url" class="form-control" placeholder="https://youtube.com/..." style="text-align:left; direction:ltr;" />
+          </div>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="form-group">
+            <label class="form-label">صورة الشعار</label>
+            <div class="upload-zone" id="logoUploadZone">
+              <div class="upload-zone-icon">📷</div>
+              <p>اضغط أو اسحب الشعار هنا</p>
+              <div id="logoPreview" class="upload-preview" style="display:none">
+                <div class="upload-thumb">
+                  <img id="logoImg" src="" />
+                  <div class="upload-thumb-remove" id="removeLogo">✕</div>
+                </div>
+              </div>
+            </div>
+            <input type="file" id="logoFile" accept="image/*" class="hidden" />
+            <input type="hidden" id="logoUrl" />
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">صورة الغلاف</label>
+            <div class="upload-zone" id="coverUploadZone">
+              <div class="upload-zone-icon">🖼️</div>
+              <p>اضغط أو اسحب الغلاف هنا</p>
+              <div id="coverPreview" class="upload-preview" style="display:none">
+                <div class="upload-thumb">
+                  <img id="coverImg" src="" />
+                  <div class="upload-thumb-remove" id="removeCover">✕</div>
+                </div>
+              </div>
+            </div>
+            <input type="file" id="coverFile" accept="image/*" class="hidden" />
+            <input type="hidden" id="coverUrl" />
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" id="cancelModal">إلغاء</button>
+      <button class="btn btn-primary" id="saveCompany">حفظ الشركة</button>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="../../pages-js/dashboard/companies.js"></script>
+</body>
+</html>

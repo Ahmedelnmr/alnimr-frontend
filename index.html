@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>النمر للعقارات — عقارات فاخرة</title>
+  <meta name="description" content="اكتشف المشاريع العقارية السكنية والتجارية والإدارية الفاخرة من كبار المطورين في مصر." />
+
+  <!-- Global config -->
+  <script>
+    window.APP_CONFIG = {
+      API_URL: 'http://localhost:8000/api/v1',
+      CLOUDINARY_CLOUD_NAME: 'your-cloud-name',
+      CLOUDINARY_UPLOAD_PRESET: 'your-upload-preset',
+    };
+  </script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/main.css" />
+
+  <style>
+    .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .hero-search { background: rgba(255,255,255,0.12); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.2); border-radius: var(--radius-xl); padding: 20px 24px; display: flex; gap: 12px; flex-wrap: wrap; max-width: 860px; margin-top: 40px; }
+    .hero-search .form-control { background: rgba(255,255,255,0.9); border: none; flex: 1; min-width: 180px; }
+    .stats-bar { background: var(--bg-dark); padding: 28px 0; }
+    .stats-bar-inner { display: flex; justify-content: center; gap: 64px; flex-wrap: wrap; }
+    .stat-item { text-align: center; }
+    .stat-item .num { font-family: var(--font-heading); font-size: 2.2rem; font-weight: 700; color: var(--color-gold); }
+    .stat-item .label { font-size: 0.85rem; color: rgba(248,244,238,0.6); text-transform: uppercase; letter-spacing: 1px; }
+    .company-card { background: var(--bg-card); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); transition: transform var(--transition-base), box-shadow var(--transition-base); cursor: pointer; text-align: center; }
+    .company-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .company-card-cover { height: 160px; background: var(--bg-section-alt); overflow: hidden; }
+    .company-card-cover img { width: 100%; height: 100%; object-fit: cover; }
+    .company-card-body { padding: 24px; }
+    .company-logo { width: 72px; height: 72px; border-radius: var(--radius-md); border: 3px solid var(--color-cream); box-shadow: var(--shadow-md); object-fit: cover; margin: -48px auto 16px; background: white; }
+    .company-name { font-family: var(--font-heading); font-size: 1.2rem; font-weight: 600; margin-bottom: 6px; }
+    .company-projects { color: var(--text-muted); font-size: 0.88rem; }
+  </style>
+</head>
+<body>
+
+<!-- ====== NAVBAR ====== -->
+<nav class="navbar navbar-transparent" id="navbar">
+  <div class="navbar-inner">
+    <a href="index.html" class="navbar-logo">
+      النمر<span class="logo-accent">للعقارات</span>
+    </a>
+
+    <ul class="navbar-nav" id="navMenu">
+      <li><a href="index.html" class="active">الرئيسية</a></li>
+      <li><a href="pages/projects.html">المشاريع</a></li>
+      <li><a href="pages/companies.html">المطورين</a></li>
+    </ul>
+
+    <div class="navbar-actions">
+      <a href="pages/dashboard/index.html" class="btn btn-outline btn-sm">لوحة التحكم</a>
+    </div>
+
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ====== HERO ====== -->
+<section class="hero" id="hero">
+  <div class="hero-bg" id="heroBg" style="background-image: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920&q=80');"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">عقارات فاخرة</div>
+    <h1>ابحث عن<br>عقار أحلامك</h1>
+    <p>اكتشف المشاريع السكنية والتجارية والإدارية الحصرية من كبار المطورين في مصر.</p>
+
+    <!-- Quick Search -->
+    <div class="hero-search">
+      <input type="text" id="heroSearch" class="form-control" placeholder="ابحث عن مشروع، موقع..." />
+      <select id="heroType" class="form-control">
+        <option value="">جميع الأنواع</option>
+        <option value="Residential">سكني</option>
+        <option value="Commercial">تجاري</option>
+        <option value="Administrative">إداري</option>
+        <option value="Medical">طبي</option>
+      </select>
+      <select id="heroStatus" class="form-control">
+        <option value="">جميع الحالات</option>
+        <option value="Launch">إطلاق جديد</option>
+        <option value="Under Construction">تحت الإنشاء</option>
+        <option value="Ready">جاهز للاستلام</option>
+      </select>
+      <button class="btn btn-primary" id="heroSearchBtn">
+        🔍 بحث
+      </button>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span>مرر لأسفل</span>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m19 9-7 7-7-7"/></svg>
+  </div>
+</section>
+
+<!-- ====== STATS BAR ====== -->
+<div class="stats-bar">
+  <div class="stats-bar-inner" id="statsBar">
+    <div class="stat-item"><div class="num" id="statCompanies">—</div><div class="label">مطوّر عقاري</div></div>
+    <div class="stat-item"><div class="num" id="statProjects">—</div><div class="label">مشروع</div></div>
+    <div class="stat-item"><div class="num" id="statUnits">—</div><div class="label">وحدة متاحة</div></div>
+  </div>
+</div>
+
+<!-- ====== FEATURED PROJECTS ====== -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">المحفظة</span>
+      <h2>أبرز المشاريع</h2>
+      <div class="gold-divider"></div>
+      <p>تطورات فاخرة تم اختيارها بعناية تقدم فرصاً استثنائية للعيش والاستثمار.</p>
+    </div>
+
+    <div class="grid grid-3" id="featuredProjects">
+      <!-- Skeleton loaders -->
+      <div class="skeleton" style="height:380px;border-radius:var(--radius-lg)"></div>
+      <div class="skeleton" style="height:380px;border-radius:var(--radius-lg)"></div>
+      <div class="skeleton" style="height:380px;border-radius:var(--radius-lg)"></div>
+    </div>
+
+    <div style="text-align:center;margin-top:40px">
+      <a href="pages/projects.html" class="btn btn-secondary btn-lg">عرض جميع المشاريع</a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== DEVELOPERS ====== -->
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">المطورون</span>
+      <h2>شركاؤنا الموثوقون</h2>
+      <div class="gold-divider"></div>
+      <p>أكثر شركات التطوير العقاري سمعة في مصر.</p>
+    </div>
+
+    <div class="grid grid-4" id="companiesGrid">
+      <div class="skeleton" style="height:260px;border-radius:var(--radius-lg)"></div>
+      <div class="skeleton" style="height:260px;border-radius:var(--radius-lg)"></div>
+      <div class="skeleton" style="height:260px;border-radius:var(--radius-lg)"></div>
+      <div class="skeleton" style="height:260px;border-radius:var(--radius-lg)"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== WHY CHOOSE US ====== -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">لماذا نحن</span>
+      <h2>اختلاف النمر</h2>
+      <div class="gold-divider"></div>
+    </div>
+    <div class="grid grid-3">
+      <div class="card card-body" style="text-align:center;padding:40px">
+        <div style="font-size:2.5rem;margin-bottom:16px">🏆</div>
+        <h4>تميز منتقى</h4>
+        <p style="margin-top:8px">فقط أرقى التطورات، يتم التدقيق فيها بعناية للجودة وإمكانية الاستثمار.</p>
+      </div>
+      <div class="card card-body" style="text-align:center;padding:40px">
+        <div style="font-size:2.5rem;margin-bottom:16px">🔑</div>
+        <h4>خدمة متكاملة</h4>
+        <p style="margin-top:8px">من البحث إلى التسليم — دعم كامل طوال رحلتك العقارية.</p>
+      </div>
+      <div class="card card-body" style="text-align:center;padding:40px">
+        <div style="font-size:2.5rem;margin-bottom:16px">📊</div>
+        <h4>رؤية استثمارية</h4>
+        <p style="margin-top:8px">تحليل سوق مبني على البيانات لمساعدتك على اتخاذ قرارات استثمارية واثقة.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FOOTER ====== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">النمر<span>للعقارات</span></div>
+        <p>المنصة الرائدة لعرض وإدارة العقارات في مصر التي تربط المشترين بأرقى التطورات.</p>
+      </div>
+      <div>
+        <div class="footer-title">تصفح</div>
+        <ul class="footer-links">
+          <li><a href="index.html">الرئيسية</a></li>
+          <li><a href="pages/projects.html">المشاريع</a></li>
+          <li><a href="pages/companies.html">المطورين</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-title">أنواع العقارات</div>
+        <ul class="footer-links">
+          <li><a href="pages/projects.html?type=Residential">سكني</a></li>
+          <li><a href="pages/projects.html?type=Commercial">تجاري</a></li>
+          <li><a href="pages/projects.html?type=Administrative">إداري</a></li>
+          <li><a href="pages/projects.html?type=Medical">طبي</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-title">الحالة</div>
+        <ul class="footer-links">
+          <li><a href="pages/projects.html?status=Launch">إطلاق جديد</a></li>
+          <li><a href="pages/projects.html?status=Under Construction">تحت الإنشاء</a></li>
+          <li><a href="pages/projects.html?status=Ready">جاهز للاستلام</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2024 النمر للعقارات. جميع الحقوق محفوظة.</span>
+      <a href="pages/dashboard/login.html" style="color:rgba(248,244,238,0.3);font-size:0.8rem">الإدارة</a>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="pages-js/home.js"></script>
+</body>
+</html>

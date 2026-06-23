@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>العقارات والوحدات — النمر للعقارات</title>
+  <script>window.APP_CONFIG = { API_URL: 'http://localhost:8000/api/v1' };</script>
+  <link rel="stylesheet" href="../../css/main.css" />
+  <link rel="stylesheet" href="../../css/dashboard.css" />
+</head>
+<body>
+
+<div class="dash-card">
+  <div class="dash-card-header">
+    <h3>العقارات والوحدات</h3>
+    <div style="display:flex; gap:12px">
+      <select id="filterProject" class="form-control" style="width:250px">
+        <option value="">جميع المشاريع</option>
+      </select>
+      <button class="btn btn-primary btn-sm" id="openCreateModal">➕ إضافة عقار / وحدة</button>
+    </div>
+  </div>
+  <div class="dash-card-body p-0">
+    <table class="table" id="unitsTable">
+      <thead>
+        <tr>
+          <th>المشروع</th>
+          <th>النوع</th>
+          <th>المساحة</th>
+          <th>السعر</th>
+          <th>الحالة</th>
+          <th style="text-align:left">الإجراءات</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td colspan="6" class="text-center" style="padding:40px">اختر مشروعاً أو انتظر التحميل...</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal: Create / Edit Unit -->
+<div class="modal-overlay" id="unitModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modalTitle">إضافة عقار / وحدة</h3>
+      <div class="modal-close" id="closeModal">✕</div>
+    </div>
+    <div class="modal-body">
+      <form id="unitForm">
+        <input type="hidden" id="unitId" />
+        
+        <div class="form-group">
+          <label class="form-label">المشروع التابع له <span>*</span></label>
+          <select id="project_id" class="form-control" required></select>
+        </div>
+
+        <div class="grid grid-2">
+          <div class="form-group">
+            <label class="form-label">نوع العقار <span>*</span></label>
+            <select id="unit_type" class="form-control" required>
+              <option value="Apartment">شقة</option>
+              <option value="Villa">فيلا</option>
+              <option value="Office">مكتب إداري</option>
+              <option value="Clinic">عيادة طبية</option>
+              <option value="Shop">محل تجاري</option>
+              <option value="Duplex">دوبلكس</option>
+              <option value="Penthouse">بنتهاوس</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">الحالة <span>*</span></label>
+            <select id="status" class="form-control" required>
+              <option value="Available">متاح</option>
+              <option value="Reserved">محجوز</option>
+              <option value="Sold">مباع</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-3">
+          <div class="form-group">
+            <label class="form-label">المساحة (م²)</label>
+            <input type="number" id="area" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">عدد الغرف</label>
+            <input type="number" id="rooms" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">السعر (ج.م)</label>
+            <input type="number" id="price" class="form-control" />
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" id="cancelModal">إلغاء</button>
+      <button class="btn btn-primary" id="saveUnit">حفظ العقار</button>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="../../pages-js/dashboard/units.js"></script>
+</body>
+</html>
