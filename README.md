@@ -1,11 +1,11 @@
 # Alnimr Real Estate: Frontend
 
-The Arabic (RTL) front-end for **النمر للعقارات**, a luxury real-estate showcase. It pairs with the [realestate-api](https://github.com/Ahmedelnmr/realestate-api) Laravel back end.
+The Arabic (RTL) front-end for النمر للعقارات, a luxury real-estate showcase. It pairs with the [realestate-api](https://github.com/Ahmedelnmr/realestate-api) Laravel back end.
 
 ## Features
 
-- **Public site**: home page with hero video and search, companies list and detail, projects list and detail.
-- **Admin dashboard**: login, companies, projects, units and media management.
+- Public site: home page with hero video and search, companies list and detail, projects list and detail.
+- Admin dashboard: login, companies, projects, units and media management.
 - Image uploads through Cloudinary.
 - No build step: plain HTML, CSS and JavaScript modules.
 
@@ -39,7 +39,3 @@ Start the API from [realestate-api](https://github.com/Ahmedelnmr/realestate-api
 ```bash
 npx serve .
 ```
-
-## Author
-
-Ahmed Elnmr, https://github.com/Ahmedelnmr
